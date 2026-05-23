@@ -11,6 +11,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/fatih/color"
+	"github.com/mfsv/cx/internal/api"
 )
 
 var (
@@ -192,6 +193,43 @@ type ConvertRow struct {
 	Source     string
 	BuyResult  float64
 	SellResult float64
+}
+
+func PrintCurrenciesTable(rates []api.CBURate) {
+	col0w, col1w, col2w, col3w := 4, 1, 1, 1 // Code, UZ, RU, EN
+	for _, r := range rates {
+		if w := utf8.RuneCountInString(r.Ccy); w > col0w {
+			col0w = w
+		}
+		if w := utf8.RuneCountInString(r.CcyNmUZ); w > col1w {
+			col1w = w
+		}
+		if w := utf8.RuneCountInString(r.CcyNmRU); w > col2w {
+			col2w = w
+		}
+		if w := utf8.RuneCountInString(r.CcyNmEN); w > col3w {
+			col3w = w
+		}
+	}
+
+	gap := 2
+	h0 := headerColor.Sprint(padRight("Kod", col0w))
+	h1 := headerColor.Sprint(padRight("O'zbekcha", col1w))
+	h2 := headerColor.Sprint(padRight("Ruscha", col2w))
+	h3 := headerColor.Sprint(padRight("Inglizcha", col3w))
+	sp := strings.Repeat(" ", gap)
+	fmt.Printf("%s%s%s%s%s%s%s\n", h0, sp, h1, sp, h2, sp, h3)
+	fmt.Println(strings.Repeat("─", col0w+col1w+col2w+col3w+gap*3))
+
+	for _, r := range rates {
+		c0 := padRight(r.Ccy, col0w)
+		c1 := padRight(r.CcyNmUZ, col1w)
+		c2 := padRight(r.CcyNmRU, col2w)
+		c3 := padRight(r.CcyNmEN, col3w)
+		fmt.Printf("%s%s%s%s%s%s%s\n",
+			headerColor.Sprint(c0), sp, c1, sp, dimColor.Sprint(c2), sp, dimColor.Sprint(c3))
+	}
+	fmt.Printf("\n%s %d ta valyuta\n", dimColor.Sprint("Manba: cbu.uz —"), len(rates))
 }
 
 func cleanRate(s string) string {
