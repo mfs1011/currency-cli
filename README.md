@@ -2,6 +2,12 @@
 
 Uzbekiston banklari va Markaziy bank kurslarini terminaldan ko'rish va konvertatsiya qilish vositasi. macOS, Linux va Android Termux da ishlaydi.
 
+## Ko'rinishi
+
+| Termux (Android) | Mac Terminal |
+|------------------|--------------|
+| ![Termux](screenshots/termux.jpg) | ![Mac](screenshots/mac.png) |
+
 **Manbalar:**
 - [onmap.uz](https://onmap.uz) — tijorat banklari kursi (kuniga 4 marta yangilanadi)
 - [cbu.uz](https://cbu.uz) — Markaziy bank rasmiy kursi (kunlik)
