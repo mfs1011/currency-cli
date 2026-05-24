@@ -1,6 +1,6 @@
 package main
 
-import "github.com/mfsv/cx/cmd"
+import "github.com/mfs1011/currency-cli/cmd"
 
 func main() {
 	cmd.Execute()

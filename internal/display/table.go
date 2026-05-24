@@ -11,7 +11,7 @@ import (
 	"unicode/utf8"
 
 	"github.com/fatih/color"
-	"github.com/mfsv/cx/internal/api"
+	"github.com/mfs1011/currency-cli/internal/api"
 )
 
 var (

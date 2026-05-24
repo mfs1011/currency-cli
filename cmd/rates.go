@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/mfsv/cx/internal/api"
-	"github.com/mfsv/cx/internal/cache"
-	"github.com/mfsv/cx/internal/config"
-	"github.com/mfsv/cx/internal/display"
+	"github.com/mfs1011/currency-cli/internal/api"
+	"github.com/mfs1011/currency-cli/internal/cache"
+	"github.com/mfs1011/currency-cli/internal/config"
+	"github.com/mfs1011/currency-cli/internal/display"
 	"github.com/spf13/cobra"
 )
 

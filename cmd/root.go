@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/mfsv/cx/internal/config"
+	"github.com/mfs1011/currency-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
