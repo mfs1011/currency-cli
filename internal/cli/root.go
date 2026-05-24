@@ -3,12 +3,18 @@ package cli
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	"github.com/mfs1011/currency-cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
-var version = "0.1.0"
+var version = func() string {
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		return info.Main.Version
+	}
+	return "dev"
+}()
 
 var rootCmd = &cobra.Command{
 	Use:   "cx",
