@@ -18,18 +18,26 @@ Uzbekiston banklari va Markaziy bank kurslarini terminaldan ko'rish va konvertat
 
 ### Mac / Linux
 
+Eng oson — `go install` (clone qilish shart emas):
+
+```bash
+go install github.com/mfs1011/currency-cli/cmd/cx@latest
+```
+
+Binary `~/go/bin/cx` ga o'rnatiladi. `~/go/bin` PATH'da bo'lishi kerak:
+
+```bash
+echo 'export PATH="$HOME/go/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Yoki manbadan build qilish:
+
 ```bash
 git clone https://github.com/mfs1011/currency-cli.git
 cd currency-cli
-go build -o cx .
+go build -o cx ./cmd/cx
 sudo mv cx /usr/local/bin/
-```
-
-Yoki `~/bin` ga:
-
-```bash
-go build -o cx .
-mv cx ~/bin/
 ```
 
 ### Android — Termux
@@ -49,10 +57,10 @@ pkg install golang git
 
 # 2. Loyihani yuklab olish
 git clone https://github.com/mfs1011/currency-cli.git
-cd currency-app
+cd currency-cli
 
 # 3. Build qilish
-go build -o cx .
+go build -o cx ./cmd/cx
 
 # 4. Istalgan joydan ishlatish uchun PATH ga qo'shish
 mkdir -p ~/bin
@@ -73,12 +81,12 @@ cx rates USD
 
 #### 2-yo'l: Macda build qilib, Telegramga yuborish
 
-Agar telefonda Go o'rnatmасangiz — Macda binary yasab, Telegramga yuboring.
+Agar telefonda Go o'rnatmasangiz — Macda binary yasab, Telegramga yuboring.
 
 **Mac da (terminal):**
 
 ```bash
-cd /Users/mfsv/Projects/experiment/currency-app
+cd currency-cli
 make linux-arm64
 # dist/cx-linux-arm64 fayli yaratiladi
 ```
@@ -131,7 +139,7 @@ Bank                        Buy (UZS)    Sell (UZS)
 ----------------------------------------------------
 MKBank                         11,990       12,080
 Kapitalbank                    11,970       12,050
-Alоqabank                      11,970       12,060
+Aloqabank                      11,970       12,060
 ...
 CBU (official, 22.05.2026)     12,021       12,021
 ```
@@ -220,24 +228,27 @@ Yaratilgan fayllar `dist/` papkasida:
 ## Loyiha tuzilmasi
 
 ```
-currency-app/
-├── main.go
+currency-cli/
 ├── Makefile
 ├── cmd/
-│   ├── root.go      # CLI asosi (cobra)
-│   ├── rates.go     # cx rates
-│   ├── convert.go   # cx convert
-│   └── best.go      # cx best
+│   └── cx/
+│       └── main.go      # entry point
 └── internal/
+    ├── cli/
+    │   ├── root.go      # CLI asosi (cobra)
+    │   ├── rates.go     # cx rates
+    │   ├── convert.go   # cx convert
+    │   ├── best.go      # cx best
+    │   └── currencies.go # cx currencies
     ├── api/
-    │   ├── onmap.go  # onmap.uz API
-    │   └── cbu.go    # cbu.uz API
+    │   ├── onmap.go     # onmap.uz API
+    │   └── cbu.go       # cbu.uz API
     ├── cache/
-    │   └── cache.go  # TTL cache
+    │   └── cache.go     # TTL cache
     ├── config/
-    │   └── config.go # ~/.cx/ papkasi
+    │   └── config.go    # ~/.cx/ papkasi
     └── display/
-        └── table.go  # jadval va rang
+        └── table.go     # jadval va rang
 ```
 
 ---
