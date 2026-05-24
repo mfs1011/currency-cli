@@ -1,4 +1,4 @@
-module github.com/mfsv/cx
+module github.com/mfs1011/currency-cli
 
 go 1.26.3
 
